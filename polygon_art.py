@@ -1,52 +1,141 @@
 import turtle
 import random
 
-def draw_polygon(num_sides, size, orientation, location, color, border_size):
-    turtle.penup()
-    turtle.goto(location[0], location[1])
-    turtle.setheading(orientation)
-    turtle.color(color)
-    turtle.pensize(border_size)
-    turtle.pendown()
-    for _ in range(num_sides):
-        turtle.forward(size)
-        turtle.left(360/num_sides)
-    turtle.penup()
+# Color mode is 0 to 1
 
-def get_new_color():
-    return (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+class Polygons:
+    def __init__(self, sides: int):
+        self.sides = sides
+        self.size = self.set_random_size()
+        self.orientation = self.set_random_orientation()
+        self.location = self.set_random_location()
+        self.color = self.set_random_color()
+        self.border = self.set_random_border()
 
-turtle.speed(0)
-turtle.bgcolor('black')
-turtle.tracer(0)
-turtle.colormode(255)
+    def set_random_sides(self):
+        self.sides = random.randint(3, 5)
+        return self.sides
 
-# draw a polygon at a random location, orientation, color, and border line thickness
-num_sides = random.randint(3, 5) # triangle, square, or pentagon
-size = random.randint(50, 150)
-orientation = random.randint(0, 90)
-location = [random.randint(-300, 300), random.randint(-200, 200)]
-color = get_new_color()
-border_size = random.randint(1, 10)
-draw_polygon(num_sides, size, orientation, location, color, border_size)
+    def set_random_size(self):
+        self.size = random.randint(50, 150)
+        return self.size
 
-# specify a reduction ratio to draw a smaller polygon inside the one above
-reduction_ratio = 0.618
+    def set_random_orientation(self):
+        self.orientation = random.randint(0, 90)
+        return self.orientation
 
-# reposition the turtle and get a new location
-turtle.penup()
-turtle.forward(size*(1-reduction_ratio)/2)
-turtle.left(90)
-turtle.forward(size*(1-reduction_ratio)/2)
-turtle.right(90)
-location[0] = turtle.pos()[0]
-location[1] = turtle.pos()[1]
+    def set_random_location(self):
+        self.location = [random.randint(-300, 300), random.randint(-200, 200)]
+        return self.location
 
-# adjust the size according to the reduction ratio
-size *= reduction_ratio
+    def set_random_color(self):
+        self.color = (random.random(), random.random(), random.random())
+        return self.color
 
-# draw the second polygon embedded inside the original 
-draw_polygon(num_sides, size, orientation, location, color, border_size)
+    def set_random_border(self):
+        self.border = random.randint(1, 10)
+        return self.border
 
-# hold the window; close it by clicking the window close 'x' mark
+    def randomize_all(self):
+        self.set_random_size()
+        self.set_random_orientation()
+        self.set_random_location()
+        self.set_random_color()
+        self.set_random_border()
+
+    def draw_polygon(self):
+        turtle.penup()
+        turtle.goto(self.location[0], self.location[1])
+        turtle.setheading(self.orientation)
+        turtle.color(self.color)
+        turtle.pensize(self.border)
+        turtle.pendown()
+        for _ in range(self.sides):
+            turtle.forward(self.size)
+            turtle.left(360/self.sides)
+        turtle.penup()
+
+
+while True:
+    choice = int(input("Create an Abstract Art Piece (1-8): "))
+    if choice == 1:
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(20, 25)):
+            pol = Polygons(3)
+            pol.randomize_all()
+            pol.draw_polygon()
+        break
+    elif choice == 2:
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(15, 25)):
+            pol = Polygons(4)
+            pol.randomize_all()
+            pol.draw_polygon()
+        break
+    elif choice == 3:
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(15, 25)):
+            pol = Polygons(5)
+            pol.randomize_all()
+            pol.draw_polygon()
+        break
+    elif choice == 4:
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(15, 25)):
+            pol = Polygons(random.randint(3, 5))
+            pol.randomize_all()
+            pol.draw_polygon()
+        break
+    elif choice == 5:
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(15, 25)):
+            pol = Polygons(3)
+            pol.randomize_all()
+            for j in range(3):
+                pol.draw_polygon()
+                pol.size *= 0.618
+                pol.location[0] = turtle.pos()[0] + pol.size/5
+                pol.location[1] = turtle.pos()[1] + pol.size/5
+        break
+    elif choice == 6:
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(15, 25)):
+            pol = Polygons(4)
+            pol.randomize_all()
+            for j in range(3):
+                pol.draw_polygon()
+                pol.size *= 0.618
+                pol.location[0] = turtle.pos()[0] + pol.size/5
+                pol.location[1] = turtle.pos()[1] + pol.size/5
+        break
+    elif choice == 7:
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(15, 25)):
+            pol = Polygons(random.randint(3, 5))
+            pol.randomize_all()
+            for j in range(3):
+                pol.draw_polygon()
+                pol.size *= 0.618
+                pol.location[0] = turtle.pos()[0] + pol.size/5
+                pol.location[1] = turtle.pos()[1] + pol.size/5
+        break
+    elif choice == 8:
+        pass
+    else:
+        print("Please select a valid option!")
+
 turtle.done()
