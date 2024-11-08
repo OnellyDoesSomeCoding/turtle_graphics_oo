@@ -57,7 +57,7 @@ class Polygons:
 
 
 while True:
-    choice = int(input("Create an Abstract Art Piece (1-8): "))
+    choice = int(input("Create an Abstract Art Piece (1-9): "))
     if choice == 1:
         turtle.speed(0)
         turtle.bgcolor('black')
@@ -104,8 +104,8 @@ while True:
             for j in range(3):
                 pol.draw_polygon()
                 pol.size *= 0.618
-                pol.location[0] = turtle.pos()[0] + pol.size/5
-                pol.location[1] = turtle.pos()[1] + pol.size/5
+                pol.location[0] = turtle.pos()[0] + pol.size/12
+                pol.location[1] = turtle.pos()[1] + pol.size/12
         break
     elif choice == 6:
         turtle.speed(0)
@@ -117,10 +117,23 @@ while True:
             for j in range(3):
                 pol.draw_polygon()
                 pol.size *= 0.618
+                pol.location[0] = turtle.pos()[0] + pol.size/12
+                pol.location[1] = turtle.pos()[1] + pol.size/12
+        break
+    elif choice == 7:
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(15, 25)):
+            pol = Polygons(5)
+            pol.randomize_all()
+            for j in range(3):
+                pol.draw_polygon()
+                pol.size *= 0.618
                 pol.location[0] = turtle.pos()[0] + pol.size/5
                 pol.location[1] = turtle.pos()[1] + pol.size/5
         break
-    elif choice == 7:
+    elif choice == 8:
         turtle.speed(0)
         turtle.bgcolor('black')
         turtle.tracer(0)
@@ -133,8 +146,26 @@ while True:
                 pol.location[0] = turtle.pos()[0] + pol.size/5
                 pol.location[1] = turtle.pos()[1] + pol.size/5
         break
-    elif choice == 8:
-        pass
+    elif choice == 9:
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(10, 15)):
+            pol = Polygons(random.randint(3, 5))
+            pol.randomize_all()
+            for j in range(3):
+                pol.draw_polygon()
+                pol.size *= 0.618
+                pol.location[0] = turtle.pos()[0] + pol.size/5
+                pol.location[1] = turtle.pos()[1] + pol.size/5
+        turtle.speed(0)
+        turtle.bgcolor('black')
+        turtle.tracer(0)
+        for i in range(0, random.randint(10, 15)):
+            pol = Polygons(random.randint(3, 5))
+            pol.randomize_all()
+            pol.draw_polygon()
+        break
     else:
         print("Please select a valid option!")
 
